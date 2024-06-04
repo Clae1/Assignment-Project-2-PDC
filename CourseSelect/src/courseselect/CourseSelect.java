@@ -8,7 +8,8 @@ package courseselect;
  *
  * @author claeo
  */
-public class CourseSelect {
+public class CourseSelect 
+{
 
     /**
      * @param args the command line arguments
@@ -16,6 +17,10 @@ public class CourseSelect {
     public static void main(String[] args) 
     {
         // TODO code application logic here
+        Model model = new Model();
+        View view = new View(); 
+        Controller controller = new Controller(view, model);
+        model.addObserver(view);
     }
     
 }
