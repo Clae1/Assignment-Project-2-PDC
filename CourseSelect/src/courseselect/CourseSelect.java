@@ -4,6 +4,8 @@
  */
 package courseselect;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author claeo
@@ -14,7 +16,7 @@ public class CourseSelect
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+    public static void main(String[] args) throws SQLException 
     {
         // TODO code application logic here
         Model model = new Model();

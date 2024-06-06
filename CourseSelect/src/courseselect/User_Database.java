@@ -18,7 +18,7 @@ import java.sql.Statement;
 public class User_Database 
 {
     Connection conn = null;
-    String url = "jdbc:derby:PlayerDB;create=true"; 
+    String url = "jdbc:derby:StudentUserDB;create=true"; 
     String dbusername = "pdc";
     String dbpassword = "pdc";
     
@@ -42,6 +42,47 @@ public class User_Database
         {
             System.out.println("error");
         }
+    }
+    
+    
+    public Data checkName(String username, String password) throws SQLException
+    {
+        Data data = new Data(); // Initialize an instance of Data
+        try
+        {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM UserInfo "
+                    + "WHERE userid = '" + username + "'");
+            if (rs.next())
+            {
+                String pass = rs.getString("password");
+                System.out.println("***" + pass);
+                System.out.println("found user");
+                
+                if (password.compareTo(pass) == 0)
+                {
+                    data.currentScore = rs.getInt("score");
+                    data.loginFlag = true;
+                }
+                else
+                {
+                    data.loginFlag = false;
+                }
+            }
+            else
+            {
+                System.out.println("no such user");
+                statement.executeUpdate("INSERT INTO UserInfo "
+                        + "VALUES('" + username + "', '" + password + "', 0)");
+                data.currentScore = 0;
+                data.loginFlag = true;
+            }
+        }
+        catch (SQLException ex)
+        {
+            
+        }
+        return data;
     }
     
     

@@ -6,6 +6,9 @@ package courseselect;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,7 +29,14 @@ public class Controller implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) 
     {
-        
+        String command = e.getActionCommand(); 
+        switch (command)
+        {
+            case "Log in":
+                // This is for the login button  
+                String username = this.view.unInput.getText(); 
+                String password = this.view.pwInput.getText(); 
+            break;
+        }
     }
-    
 }
