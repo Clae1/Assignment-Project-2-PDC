@@ -43,6 +43,7 @@ public class View extends JFrame implements Observer
     //This is for the login page 
     public View()
     {
+        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(600, 200);
         this.setLocationRelativeTo(null); //Make the frame located at the absolute center of the screen
