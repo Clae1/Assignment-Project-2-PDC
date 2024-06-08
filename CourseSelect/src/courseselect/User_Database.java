@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,30 +30,29 @@ public class User_Database
         {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
-            String tableName = "UserInfo";
+            String tableName = "StudentUser";
             
             if (!checkTableExisitng(tableName))
             {
-                statement.executeUpdate("CREATE TABLE " + tableName + "(userid VARCHAR(12), password VARCHAR(12), score INT)");
+                statement.executeUpdate("CREATE TABLE " + tableName + "(stuID VARCHAR(12), password VARCHAR(12), papers VARCHAR(100))");
             }
-           //statement.executeUpdate("INSERT INTO " + tableName + " VALUES")....
             statement.close();
         }
         
-        catch (SQLException e)
+        catch (SQLException ex)
         {
-            System.out.println("error");
+            System.out.print(ex);
         }
     }
     
     
     public Data checkName(String username, String password) throws SQLException
     {
-        Data data = new Data(); // Initialize an instance of Data
+        Data data = new Data();
         try
         {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userid, password, score FROM UserInfo "
+            ResultSet rs = statement.executeQuery("SELECT userid, password, papers FROM StudentDB"
                     + "WHERE userid = '" + username + "'");
             if (rs.next())
             {
@@ -61,7 +62,6 @@ public class User_Database
                 
                 if (password.compareTo(pass) == 0)
                 {
-                    data.currentScore = rs.getInt("score");
                     data.loginFlag = true;
                 }
                 else
@@ -72,15 +72,14 @@ public class User_Database
             else
             {
                 System.out.println("no such user");
-                statement.executeUpdate("INSERT INTO UserInfo "
+                statement.executeUpdate("INSERT INTO StudentUser "
                         + "VALUES('" + username + "', '" + password + "', 0)");
-                data.currentScore = 0;
                 data.loginFlag = true;
             }
         }
         catch (SQLException ex)
         {
-            
+            System.out.println("Table not found");
         }
         return data;
     }
@@ -117,3 +116,4 @@ public class User_Database
         return flag;
     }
 }
+

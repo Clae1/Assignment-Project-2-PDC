@@ -46,7 +46,6 @@ public class Controller implements ActionListener
                     Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }  
-                
             break;
         }
     }

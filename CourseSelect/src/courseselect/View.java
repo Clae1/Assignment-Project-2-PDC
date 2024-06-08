@@ -21,7 +21,7 @@ import javax.swing.JTextField;
 public class View extends JFrame implements Observer
 {
     /**
-     * In this part of the code is where we declare the components for each
+     * This part of the code is where we declare the components for each
      * page for the program, if you are creating a new page please component 
      * and the declare the components so that we know which component is for 
      * which page.
@@ -30,7 +30,6 @@ public class View extends JFrame implements Observer
     //For user page
     private JButton loginButton = new JButton("Log in");
     private JPanel userPanel = new JPanel();
-    private JPanel calcPanel = new JPanel();
     public JLabel message = new JLabel("Welcome!", JLabel.CENTER);
     private JLabel uName = new JLabel("Username: ");
     private JLabel pWord = new JLabel("Password: ");
@@ -38,6 +37,9 @@ public class View extends JFrame implements Observer
     public JTextField pwInput = new JTextField(10);
     private JLabel wrongName = new JLabel("Wrong username or password!");
     
+    //For Main menu page
+    private JButton SelectPaperButton = new JButton("Choose paper here");
+    private JPanel mainMenuPanel = new JPanel();
     
     
     //This is for the login page 
@@ -55,11 +57,28 @@ public class View extends JFrame implements Observer
         this.add(userPanel);
         this.setVisible(true);
     }
+    
+    public void mainMenu()
+    {
+        this.setSize(600, 600);
+        mainMenuPanel.add(SelectPaperButton);
+    }
 
     @Override
     public void update(Observable o, Object arg) 
     {
+        Data data = (Data) arg;
+        if (!data.loginFlag)
+        {
+            this.unInput.setText("");
+            this.pwInput.setText("");
+            this.message.setText("Invalid Username or password.");
+        }
         
+        else
+        {
+            this.mainMenu();
+        }
     }
     
     
@@ -67,7 +86,8 @@ public class View extends JFrame implements Observer
     //page of the GUI
     public void addActionListener(ActionListener listener)
     {
-        
+        //for the login page 
+        this.loginButton.addActionListener(listener);
     }
     
 }

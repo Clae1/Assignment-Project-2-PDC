@@ -35,13 +35,7 @@ public class Model extends Observable
     {
         this.username = username; //Store username 
         this.data = this.db.checkName(username, password);
-        
-        if (data.loginFlag)
-        {
-           
-        }
         this.setChanged(); 
-        
         this.notifyObservers(this.data);
     }
 }
