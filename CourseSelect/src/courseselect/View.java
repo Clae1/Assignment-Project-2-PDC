@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  *
  * @author claeo
  */
-public class View extends JFrame implements Observer
+public class View extends JFrame implements Observer, Pages
 {
     /**
      * This part of the code is where we declare the components for each
@@ -58,6 +58,8 @@ public class View extends JFrame implements Observer
         this.setVisible(true);
     }
     
+    
+    @Override
     public void mainMenu()
     {
         this.setSize(600, 600);
