@@ -36,6 +36,17 @@ public class Controller implements ActionListener
                 // This is for the login button  
                 String username = this.view.unInput.getText(); 
                 String password = this.view.pwInput.getText(); 
+            {
+                try
+                {
+                    this.model.checkName(username, password);
+                } 
+                catch (SQLException ex) 
+                {
+                    Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }  
+                
             break;
         }
     }
