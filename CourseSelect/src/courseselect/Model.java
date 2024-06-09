@@ -33,7 +33,7 @@ public class Model extends Observable
     
     public void checkName(String username, String password) throws SQLException
     {
-        this.username = username; //Store username 
+        this.username = username; 
         this.data = this.db.checkName(username, password);
         this.setChanged(); 
         this.notifyObservers(this.data);

@@ -10,8 +10,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +18,8 @@ import java.util.logging.Logger;
 public class User_Database 
 {
     Connection conn = null;
-    String url = "jdbc:derby:StudentUserDB;create=true"; 
+    //String url = "jdbc:derby:StudentUserDB;create=true"; 
+    String url = "jdbc:derby://localhost:1527/Testing [pdc on PDC];create=true"; 
     String dbusername = "pdc";
     String dbpassword = "pdc";
     
@@ -30,7 +29,7 @@ public class User_Database
         {
             conn = DriverManager.getConnection(url, dbusername, dbpassword);
             Statement statement = conn.createStatement();
-            String tableName = "StudentUser";
+            String tableName = "StudentUserTable";
             
             if (!checkTableExisitng(tableName))
             {
@@ -52,8 +51,8 @@ public class User_Database
         try
         {
             Statement statement = conn.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT userid, password, papers FROM StudentDB"
-                    + "WHERE userid = '" + username + "'");
+            ResultSet rs = statement.executeQuery("SELECT stuID, password, papers FROM Testing"
+                    + "WHERE stuID = '" + username + "'");
             if (rs.next())
             {
                 String pass = rs.getString("password");
@@ -72,7 +71,7 @@ public class User_Database
             else
             {
                 System.out.println("no such user");
-                statement.executeUpdate("INSERT INTO StudentUser "
+                statement.executeUpdate("INSERT INTO StudentUser"
                         + "VALUES('" + username + "', '" + password + "', 0)");
                 data.loginFlag = true;
             }
